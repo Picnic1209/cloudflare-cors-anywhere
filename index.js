@@ -54,7 +54,6 @@ addEventListener("fetch", async event => {
 
                 headers.delete("X-Content-Type-Options"); // Remove X-Content-Type-Options header
             }
-            return headers;
         }
 
         const targetUrl = decodeURIComponent(decodeURIComponent(originUrl.search.substr(1)));
@@ -103,7 +102,7 @@ addEventListener("fetch", async event => {
                     allResponseHeaders[key] = value;
                 }
                 exposedHeaders.push("cors-received-headers");
-                responseHeaders = setupCORSHeaders(responseHeaders);
+                setupCORSHeaders(responseHeaders);
 
                 responseHeaders.set("Access-Control-Expose-Headers", exposedHeaders.join(","));
                 responseHeaders.set("cors-received-headers", JSON.stringify(allResponseHeaders));
@@ -119,7 +118,7 @@ addEventListener("fetch", async event => {
 
             } else {
                 const responseHeaders = new Headers();
-                responseHeaders = setupCORSHeaders(responseHeaders);
+                setupCORSHeaders(responseHeaders);
 
                 let country = false;
                 let colo = false;
